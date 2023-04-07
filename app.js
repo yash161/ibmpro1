@@ -229,10 +229,10 @@ app.post('/login', function (request, response) {
 
 					console.log(roleValue);
 					if (otp1 == otp) {
-						if (roleValue === "customer service") {
+						if (roleValue === "customerservice") {
 							request.session.username = username;
 							response.redirect('/cust');
-						} else if (roleValue === "Receptionists") {
+						} else if (roleValue === "receptionist") {
 							request.session.username = username;
 							response.redirect('/recp');
 						} else {
@@ -275,8 +275,9 @@ app.post("/reg", function (request, response) {
 			}
 		}
 	}
-
+	console.log("before condition",password,username);
 	if (username && password) {
+		console.log(username,password);
 		connection.getConnection(function (err) {
 			if (err) throw err;
 			console.log("Connected!");
