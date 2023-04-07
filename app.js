@@ -236,7 +236,7 @@ app.post('/login', function (request, response) {
 							request.session.username = username;
 							response.redirect('/recp');
 						} else {
-							console.log("invalid decrypted value");
+							console.log("invalid value");
 						}
 					}
 					else {
@@ -528,7 +528,7 @@ app.get("/getProgress", (req, res) => {
 							if (error) {
 								console.log(error.message);
 							} else {
-								if (results.length > 0 && results[0].progress === 100) {
+								if (results.length >= 0 && results[0].progress === 100) {
 									completedVideos++;
 									if (completedVideos === results.length) {
 										// If all videos are completed, generate the certificate
