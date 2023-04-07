@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>Plus Admin</title>
+	<!-- plugins:css -->
+	<link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
+	<link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
+	<link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+	<!-- endinject -->
+	<!-- Plugin css for this page -->
+	<link rel="stylesheet" href="vendors/select2/select2.min.css" />
+	<link rel="stylesheet" href="vendors/select2-bootstrap-theme/select2-bootstrap.min.css" />
+	<!-- End plugin css for this page -->
+	<!-- inject:css -->
+	<!-- endinject -->
+	<!-- Layout styles -->
+	<link rel="stylesheet" href="css/demo_2/style.css" />
+	<!-- End layout styles -->
+	<link rel="shortcut icon" href="images/favicon.png" />
+</head>
+
+<body>
+	<div class="container-scroller">
+		<div class="horizontal-menu">
+			<%- include("./partials/navbar", {'username': username , 'logged_in':logged_in}); %>
+		</div>
+		<!-- partial -->
+		<div class="container-fluid page-body-wrapper">
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<div class="page-header">
+						<h2 class="page-title">Quiz</h2>
+						<!-- <nav aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="#">Forms</a></li>
+								<li class="breadcrumb-item active" aria-current="page"> Form elements </li>
+							</ol>
+						</nav> -->
+					</div>
+					<div class="row">
+						<div class="col-md-12 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<form class="forms-sample">
+										<div class="mb-5">
+											<h3>Question 1:</h3>
+											<p>What is the most important thing to remember when dealing with a customer?</p>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q1" id="q1a1"> Be rude and confrontational <i class="input-helper"></i></label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q1" id="q1a2"> Ignore the customer <i class="input-helper"></i></label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q1" id="q1a3"> Listen to the customer and empathize with their situation <i class="input-helper"></i></label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q1" id="q1a4"> Argue with the customer <i class="input-helper"></i></label>
+											</div>
+										</div>
+
+										<div class="mb-5">
+											<h3>Question 2:</h3>
+											<p>What should you do if you don't know the answer to a customer's question?</p>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q2" id="q2a1"> Make up an answer <i class="input-helper"></i></label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q2" id="q2a2"> Say you don't know, but you will find out and get back to them <i class="input-helper"></i></label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q2" id="q2a3"> Ignore the question <i class="input-helper"></i></label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q2" id="q2a4"> Laugh and walk away <i class="input-helper"></i></label>
+											</div>
+										</div>
+
+										<div class="mb-5">
+											<h3>Question 3:</h3>
+											<p>What should you do if a customer is angry or upset?</p>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q3" id="q3a1"> Tell them to calm down and stop being unreasonable <i class="input-helper"></i></label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q3" id="q3a2"> Argue with them <i class="input-helper"></i></label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q3" id="q3a3"> Ignore them and hope they go away <i class="input-helper"></i></label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q3" id="q3a4"> Listen to them, empathize with their situation, and try to find a solution <i class="input-helper"></i></label>
+											</div>
+										</div>
+
+										<div class="mb-5">
+											<h3>Question 4:</h3>
+											<p>What should you do if a customer complains about a product or service?</p>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q4" id="q4a1"> Apologize and try to resolve the issue <i class="input-helper"></i></label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q4" id="q4a2"> Tell them it's not your problem <i class="input-helper"></i></label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q4" id="q4a3"> Ignore them and hope they go away <i class="input-helper"></i></label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q4" id="q4a4"> Argue with them <i class="input-helper"></i></label>
+											</div>
+										</div>
+
+										<div class="mb-5">
+											<h3>Question 5:</h3>
+											<p>What should you do if a customer leaves a negative review online?</p>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q5" id="q5a1"> Ignore it and hope no one else sees it <i class="input-helper"></i></label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q5" id="q5a2"> Respond politely and try to resolve the issue <i class="input-helper"></i></label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q5" id="q5a3"> Delete the review <i class="input-helper"></i></label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="q5" id="q5a4"> Post a rude comment in response <i class="input-helper"></i></label>
+											</div>
+										</div>
+
+										<button type="button" class="btn btn-primary mr-2" onclick="checkAnswers()"> Submit </button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- main-panel ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+	<script>
+		function checkAnswers() {
+			var total = 5;
+			var score = 0;
+			
+			// Check answer to Question 1
+			if (document.getElementById('q1a3').checked) {
+				score++;
+			}
+			
+			// Check answer to Question 2
+			if (document.getElementById('q2a2').checked) {
+				score++;
+			}
+			
+			// Check answer to Question 3
+			if (document.getElementById('q3a4').checked) {
+				score++;
+			}
+			
+			// Check answer to Question 4
+			if (document.getElementById('q4a1').checked) {
+				score++;
+			}
+			
+			// Check answer to Question 5
+			if (document.getElementById('q5a2').checked) {
+				score++;
+			}
+			
+			// Display results
+			var percent = Math.round((score/total)*100);
+			alert("You scored " + score + " out of " + total + ".\n\nYour percentage score is: " + percent + "%.");
+		}
+	</script>
+	<!-- container-scroller -->
+	<!-- plugins:js -->
+	<script src="vendors/js/vendor.bundle.base.js"></script>
+	<!-- endinject -->
+	<!-- Plugin js for this page -->
+	<script src="vendors/select2/select2.min.js"></script>
+	<script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
+	<!-- End plugin js for this page -->
+	<!-- inject:js -->
+	<script src="js/off-canvas.js"></script>
+	<script src="js/hoverable-collapse.js"></script>
+	<script src="js/misc.js"></script>
+	<script src="js/settings.js"></script>
+	<script src="js/todolist.js"></script>
+	<!-- endinject -->
+	<!-- Custom js for this page -->
+	<script src="js/file-upload.js"></script>
+	<script src="js/typeahead.js"></script>
+	<script src="js/select2.js"></script>
+	<!-- End custom js for this page -->
+
+</body>
+
+</html>

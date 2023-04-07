@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>Plus Admin</title>
+	<!-- plugins:css -->
+	<link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
+	<link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
+	<link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+	<!-- endinject -->
+	<!-- Plugin css for this page -->
+	<link rel="stylesheet" href="vendors/select2/select2.min.css" />
+	<link rel="stylesheet" href="vendors/select2-bootstrap-theme/select2-bootstrap.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<!-- End plugin css for this page -->
+	<!-- inject:css -->
+	<!-- endinject -->
+	<!-- Layout styles -->
+	<link rel="stylesheet" href="css/demo_2/style.css" />
+	<!-- End layout styles -->
+	<link rel="shortcut icon" href="images/favicon.png" />
+	<script>
+		$(document).ready(function() {
+			$('#role').select2();
+		});
+	</script>
+	<style>
+		.select2-container--default .select2-selection--single .select2-selection__arrow {
+			height: 26px !important;
+			position: absolute;
+			top: 10px !important;
+			right: 8px !important;
+			width: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container-scroller">
+		<div class="horizontal-menu">
+			<nav class="navbar top-navbar col-lg-12 col-12 p-0">
+				<div class="container">
+					<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+						<a class="navbar-brand brand-logo" href="../../index.html">
+							<img src="images/logo3.png" alt="logo" />
+						</a>
+						<a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="images/logo-mini.svg" alt="logo" /></a>
+					</div>
+					<div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+						<button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+							<span class="mdi mdi-menu"></span>
+						</button>
+					</div>
+				</div>
+			</nav>
+			<nav class="bottom-navbar">
+				<div class="container">
+					<ul class="nav page-navigation">
+						<li class="nav-item">
+							<a class="nav-link" href="../../index.html">
+								<i class="mdi mdi-compass-outline menu-icon"></i>
+								<span class="menu-title">Dashboard</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<!-- partial -->
+		<div class="container-fluid page-body-wrapper">
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<div class="page-header">
+						<h2 class="page-title">Edustaff Registration</h2>
+						<!-- <nav aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="#">Forms</a></li>
+								<li class="breadcrumb-item active" aria-current="page"> Form elements </li>
+							</ol>
+						</nav> -->
+					</div>
+					<div class="row">
+						<div class="col-md-12 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<form class="forms-sample" action="/reg" method="post">
+										<div class="form-group">
+											<label for="uname" class="fw-bold">Username</label>
+											<input type="text" class="form-control" id="uname" name="uname" onkeyup="lettersOnly(this)" placeholder="Enter Username" required/>
+										</div>
+										<div class="form-group">
+											<label for="age" class="fw-bold">Age</label>
+											<input type="text" class="form-control" placeholder="Enter Your Age" id="age" name="age" onkeyup="lettersOnly1(this)" required/>
+										</div>
+										<div class="form-group">
+											<label for="address" class="fw-bold">Address</label>
+											<input type="text" class="form-control" placeholder="Enter Your address" id="address" name="address" onkeyup="lettersOnly(this)"/>
+										</div>
+										<div class="mb-3">
+											<label for="role" class="fw-bold">Select a role:</label> <br/>
+											<select class="fw-bold form-select" id="role" name="role">
+												<option class="fw-bold" value="receptionist">Receptionist</option>
+												<option class="fw-bold" value="admin">Admin</option>
+												<option class="fw-bold" value="customer_service">Customer Service</option>
+												<option class="fw-bold" value="sales">Sales</option>
+												<option class="fw-bold" value="marketing">Marketing</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="mno" class="fw-bold">Mobile No.</label>
+											<input type="text" class="form-control" placeholder="Enter Mobile Number" id="mno" name="mno" onkeyup="lettersOnly(this)"/>
+										</div>
+										<div class="form-group">
+											<label for="psw" class="fw-bold">Create Password</label>
+											<input type="password" class="form-control" id="psw" name="psw" placeholder="Create Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/>
+										</div>
+										<ol class="list-group list-group-numbered mb-4" id="message" style="display:none">
+											<h5>Password must contain the following:</h5>
+											<li id="letter" class="invalid list-group-item list-group-item-danger">A <b>lowercase</b> letter</li>
+											<li id="capital" class="invalid list-group-item list-group-item-danger">A <b>capital (uppercase)</b> letter</li>
+											<li id="number" class="invalid list-group-item list-group-item-danger">A <b>number</b></li>
+											<li id="length" class="invalid list-group-item list-group-item-danger">Minimum <b>8 characters</b></li>
+										</ol>
+							
+										<button type="submit" class="btn btn-primary mr-2" id="submit"> Register </button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- main-panel ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+	<!-- container-scroller -->
+	<!-- plugins:js -->
+	<script src="vendors/js/vendor.bundle.base.js"></script>
+	<!-- endinject -->
+	<!-- Plugin js for this page -->
+	<script src="vendors/select2/select2.min.js"></script>
+	<script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
+	<!-- End plugin js for this page -->
+	<!-- inject:js -->
+	<script src="js/off-canvas.js"></script>
+	<script src="js/hoverable-collapse.js"></script>
+	<script src="js/misc.js"></script>
+	<script src="js/settings.js"></script>
+	<script src="js/todolist.js"></script>
+	<!-- endinject -->
+	<!-- Custom js for this page -->
+	<script src="js/file-upload.js"></script>
+	<script src="js/typeahead.js"></script>
+	<script src="js/select2.js"></script>
+	<!-- End custom js for this page -->
+
+	<script>
+		var myInput = document.getElementById("psw");
+		var letter = document.getElementById("letter");
+		var capital = document.getElementById("capital");
+		var number = document.getElementById("number");
+		var length = document.getElementById("length");
+		
+		// When the user clicks on the password field, show the message box
+		myInput.onfocus = function() {
+		  document.getElementById("message").style.display = "block";
+		}
+		
+		// When the user clicks outside of the password field, hide the message box
+		myInput.onblur = function() {
+		  document.getElementById("message").style.display = "none";
+		}
+		
+		// When the user starts to type something inside the password field
+		myInput.onkeyup = function() {
+		  // Validate lowercase letters
+		  var lowerCaseLetters = /[a-z]/g;
+		  if(myInput.value.match(lowerCaseLetters)) {  
+			letter.classList.remove("invalid");
+			letter.classList.add("valid");
+		  } else {
+			letter.classList.remove("valid");
+			letter.classList.add("invalid");
+		  }
+		  
+		  // Validate capital letters
+		  var upperCaseLetters = /[A-Z]/g;
+		  if(myInput.value.match(upperCaseLetters)) {  
+			capital.classList.remove("invalid");
+			capital.classList.add("valid");
+		  } else {
+			capital.classList.remove("valid");
+			capital.classList.add("invalid");
+		  }
+		
+		  // Validate numbers
+		  var numbers = /[0-9]/g;
+		  if(myInput.value.match(numbers)) {  
+			number.classList.remove("invalid");
+			number.classList.add("valid");
+		  } else {
+			number.classList.remove("valid");
+			number.classList.add("invalid");
+		  }
+		  
+		  // Validate length
+		  if(myInput.value.length >= 8) {
+			length.classList.remove("invalid");
+			length.classList.add("valid");
+		  } else {
+			length.classList.remove("valid");
+			length.classList.add("invalid");
+		  }
+		}
+		</script>
+</body>
+
+</html>

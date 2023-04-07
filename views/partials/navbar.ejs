@@ -1,0 +1,62 @@
+<nav class="navbar top-navbar col-lg-12 col-12 p-0">
+    <div class="container">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo" href="index.html">
+          <img src="images/logo3.png" alt="logo" />
+        </a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo" /></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <% if(logged_in){ %>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <div class="nav-profile-img">
+                  <i style="font-size: 2rem;" class="mdi mdi-account-circle"></i>
+                </div>
+                <div class="nav-profile-text">
+                  <p class="text-black font-weight-semibold m-0"> <%- username; %></p>
+                </div>
+              </a>
+            </li>
+          </ul>
+        <% } %>  
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+          <span class="mdi mdi-menu"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <nav class="bottom-navbar">
+    <div class="container">
+      <ul class="nav page-navigation">
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            <i class="mdi mdi-compass-outline menu-icon"></i>
+            <span class="menu-title">Dashboard</span>
+          </a>
+        </li>
+        <% if(logged_in){ %>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">
+            <i class="mdi mdi-account"></i>
+            <span class="menu-title">Logout</span>
+          </a>
+        </li>
+        <% } else { %> 
+          <li class="nav-item">
+            <a class="nav-link" href="/login">
+              <i class="mdi mdi-account"></i>
+              <span class="menu-title">Login</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/reg">
+              <i class="mdi mdi-account"></i>
+              <span class="menu-title">Register</span>
+            </a>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </nav>

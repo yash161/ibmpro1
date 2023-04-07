@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>EDUSTAFF</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="vendors/jquery-bar-rating/css-stars.css" />
+    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css" />
+    <!-- End plugin css for this page -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="css/demo_2/style.css" />
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="images/favicon.png" />
+</head>
+
+<body>
+    <div class="container-scroller">
+        <!-- partial:partials/_horizontal-navbar.html -->
+        <div class="horizontal-menu">
+            <%- include("./partials/navbar", {'username': username, 'logged_in':logged_in}); %>
+        </div>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <div class="main-panel">
+                <div class="content-wrapper pb-0">
+                    <div class="container-fluid p-0 text-right mb-2">
+                        <a href="/quiz" class="btn btn-lg btn-primary"> Take Quiz</a>
+                    </div>
+                    <!-- image card row starts here -->
+                    <div class="row">
+                        <div class="col-sm-12 stretch-card grid-margin">
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <video class="video w-100" controls id="video1" data-video-id="1">
+                                        <source src="videos/recp1.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="card-body px-3 text-dark">
+                                    <div class="d-flex justify-content-between">
+                                        <h3>How to reset your password
+                                        <p id="progress1" class="p-0 m-0"><b>0% watched</b></p>
+                                        </h3>
+                                        <button type="button" class="btn btn-primary" onclick="resetProgress(1)">Reset
+                                            Progress</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 stretch-card grid-margin">
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <video class="video w-100" controls id="video2" data-video-id="2">
+                                        <source src="videos/recp2.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="card-body px-3 text-dark">
+                                    <div class="d-flex justify-content-between">
+                                        <h3>How to place an order
+                                        <p id="progress2" class="p-0 m-0"><b>0% watched</b></p>
+                                        </h3>
+                                        <button type="button" class="btn btn-primary" onclick="resetProgress(2)">Reset
+                                            Progress</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 stretch-card grid-margin">
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <video class="video w-100" controls id="video3" data-video-id="3">
+                                        <source src="videos/new4.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="card-body px-3 text-dark">
+                                    <div class="d-flex justify-content-between">
+                                        <h3>How to return an item
+                                        <p id="progress3" class="p-0 m-0"><b>0% watched</b></p>
+                                        </h3>
+                                        <button type="button" class="btn btn-primary" onclick="resetProgress(3)">Reset
+                                            Progress</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                <%- include("./partials/footer"); %>
+                    <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="vendors/jquery-bar-rating/jquery.barrating.min.js"></script>
+    <script src="vendors/chart.js/Chart.min.js"></script>
+    <script src="vendors/flot/jquery.flot.js"></script>
+    <script src="vendors/flot/jquery.flot.resize.js"></script>
+    <script src="vendors/flot/jquery.flot.categories.js"></script>
+    <script src="vendors/flot/jquery.flot.fillbetween.js"></script>
+    <script src="vendors/flot/jquery.flot.stack.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="js/off-canvas.js"></script>
+    <script src="js/hoverable-collapse.js"></script>
+    <script src="js/misc.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="js/dashboard.js"></script>
+
+    <!--new integration -->
+    <script>
+        const videos = document.querySelectorAll("video");
+        const baseUrl = "http://localhost:8000"; // Replace with your backend API URL
+
+        for (let i = 0; i < videos.length; i++) {
+            const video = videos[i];
+            const progress = document.querySelector(`#progress${i + 1}`);
+            const key = `video${i + 1}`;
+            //   let storedTime = localStorage.getItem(key);
+            //   if (storedTime) {
+            //     video.currentTime = storedTime;
+            //   }
+            const videoId = i + 1;
+            function resetProgress(videoId) {
+                axios.post(`${baseUrl}/resetProgress`, { videoId })
+                    .then(response => {
+                        console.log(response.data);
+                        const progress = document.querySelector(`#progress${videoId}`);
+                        progress.innerText = "0% watched";
+                        const video = document.querySelector(`#video${videoId}`);
+                        video.currentTime = 0; // move the dragbar to start position
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+            axios.get(`${baseUrl}/getProgress?videoId=${videoId}`)
+                .then(response => {
+                    const watchedPercentage = response.data.watchedPercentage;
+                    progress.innerText = `${Math.floor(watchedPercentage)}% watched`;
+                    // localStorage.setItem(key, video.currentTime);
+                    video.currentTime = (watchedPercentage / 100) * video.duration;
+                    if (watchedPercentage === 100) {
+                        video.disabled = true;
+                    } else {
+                        video.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+            video.addEventListener("timeupdate", function () {
+                const percentage = (video.currentTime / video.duration) * 100;
+                progress.innerText = `${Math.floor(percentage)}% watched`;
+
+
+                const videoId = i + 1; // Replace with your video ID
+                const userId = 123; // Replace with the ID of the current user
+                const watchedPercentage = percentage;
+                const data = { videoId, userId, watchedPercentage };
+                axios.post(`${baseUrl}/saveProgress`, data)
+                    .then(response => {
+                        console.log(response.data);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            });
+        }
+    </script>
+
+    <!-- End custom js for this page -->
+</body>
+
+</html>

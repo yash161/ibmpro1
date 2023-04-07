@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Customer Service Center</title>
+	<style>
+        body {
+			background-color: #E8F6E3;
+			font-family: Arial, sans-serif;
+		}
+		.video-container {
+			text-align: center;
+			margin-top: 30px;
+		}
+		.p{
+			text-align: center;
+		}
+		.h1{
+			text-align: center;
+		}
+		h2 {
+			margin-bottom: 20px;
+		}
+		.video {
+			width: 800px;
+			height: 450px;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+	<center><h1> Receptionist Training Course</h1></center>
+	<center><p><b>Welcome to the  Receptionist Training Course! Here you can find helpful videos to assist you with your inquiries.</b></p></center>
+	<div class="video-container">
+		<h2>How to reset your password</h2>
+		<video class="video" controls id="video1">
+			<source src="/static/recp1.mp4" type="video/mp4">
+		</video>
+		<p id="progress1"><b>0% watched</b></p>
+	</div>
+	<div class="video-container">
+		<h2>How to place an order</h2>
+		<video class="video" controls id="video2">
+			<source src="/static/recp2.mp4" type="video/mp4">
+		</video>
+		<p id="progress2"><b>0% watched</b></p>
+	</div>
+	<div class="video-container">
+		<h2>How to return an item</h2>
+		<video class="video" controls id="video3">
+			<source src="/static/new4.mp4" type="video/mp4">
+		</video>
+		<p id="progress3"><b>0% watched</b></p>
+	</div>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+const videos = document.querySelectorAll("video");
+const baseUrl = "http://localhost:8000"; // Replace with your backend API URL
+
+for (let i = 0; i < videos.length; i++) {
+  const video = videos[i];
+  const progress = document.querySelector(`#progress${i + 1}`);
+  const key = `video${i + 1}`;
+//   let storedTime = localStorage.getItem(key);
+//   if (storedTime) {
+//     video.currentTime = storedTime;
+//   }
+const videoId = i + 1; 
+axios.get(`${baseUrl}/getProgress?videoId=${videoId}`)
+				.then(response => {
+					const watchedPercentage = response.data.watchedPercentage;
+					progress.innerText = `${Math.floor(watchedPercentage)}% watched`;
+					// localStorage.setItem(key, video.currentTime);
+					video.currentTime = (watchedPercentage / 100) * video.duration;
+				})
+				.catch(error => {
+					console.error(error);
+				});
+  video.addEventListener("timeupdate", function() {
+    const percentage = (video.currentTime / video.duration) * 100;
+    progress.innerText = `${Math.floor(percentage)}% watched`;
+    // localStorage.setItem(key, video.currentTime);
+    
+    const videoId = i + 1; // Replace with your video ID
+    const userId = 123; // Replace with the ID of the current user
+    const watchedPercentage = percentage;
+    const data = { videoId, userId, watchedPercentage };
+    axios.post(`${baseUrl}/saveProgress`, data)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  });
+}
+</script>
+<center><button type="button" class="cancelbtn" ><a href="/logout">logout</a></button></center>
+</body>
+</html>

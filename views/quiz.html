@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Customer Service Quiz</title>
+	<style>
+		/* Overall styling */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+h3 {
+  margin-top: 20px;
+}
+
+p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+form {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+input[type="button"] {
+  margin-top: 20px;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="button"]:hover {
+  background-color: #555;
+}
+
+/* Media queries for responsive design */
+
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 10px;
+  }
+  
+  h1 {
+    font-size: 1.5em;
+  }
+  
+  h3 {
+    font-size: 1.2em;
+  }
+  
+  p {
+    font-size: 1em;
+  }
+  
+  form {
+    padding: 10px;
+  }
+  
+  input[type="button"] {
+    padding: 5px 10px;
+    font-size: 0.9em;
+  }
+}
+
+		</style>
+	<script>
+		function checkAnswers() {
+			var total = 5;
+			var score = 0;
+			
+			// Check answer to Question 1
+			if (document.getElementById('q1a3').checked) {
+				score++;
+			}
+			
+			// Check answer to Question 2
+			if (document.getElementById('q2a2').checked) {
+				score++;
+			}
+			
+			// Check answer to Question 3
+			if (document.getElementById('q3a4').checked) {
+				score++;
+			}
+			
+			// Check answer to Question 4
+			if (document.getElementById('q4a1').checked) {
+				score++;
+			}
+			
+			// Check answer to Question 5
+			if (document.getElementById('q5a2').checked) {
+				score++;
+			}
+			
+			// Display results
+			var percent = Math.round((score/total)*100);
+			alert("You scored " + score + " out of " + total + ".\n\nYour percentage score is: " + percent + "%.");
+		}
+	</script>
+</head>
+<body>
+	<h1>Customer Service Quiz</h1>
+	<p>Please answer the following questions:</p>
+	
+	<form>
+		<h3>Question 1:</h3>
+		<p>What is the most important thing to remember when dealing with a customer?</p>
+		<label><input type="radio" name="q1" id="q1a1">Be rude and confrontational</label><br>
+		<label><input type="radio" name="q1" id="q1a2">Ignore the customer</label><br>
+		<label><input type="radio" name="q1" id="q1a3">Listen to the customer and empathize with their situation</label><br>
+		<label><input type="radio" name="q1" id="q1a4">Argue with the customer</label><br>
+		
+		<h3>Question 2:</h3>
+		<p>What should you do if you don't know the answer to a customer's question?</p>
+		<label><input type="radio" name="q2" id="q2a1">Make up an answer</label><br>
+		<label><input type="radio" name="q2" id="q2a2">Say you don't know, but you will find out and get back to them</label><br>
+		<label><input type="radio" name="q2" id="q2a3">Ignore the question</label><br>
+		<label><input type="radio" name="q2" id="q2a4">Laugh and walk away</label><br>
+		
+		<h3>Question 3:</h3>
+		<p>What should you do if a customer is angry or upset?</p>
+		<label><input type="radio" name="q3" id="q3a1">Tell them to calm down and stop being unreasonable</label><br>
+		<label><input type="radio" name="q3" id="q3a2">Argue with them</label><br>
+		<label><input type="radio" name="q3" id="q3a3">Ignore them and hope they go away</label><br>
+				<label><input type="radio" name="q3" id="q3a4">Listen to them, empathize with their situation, and try to find a solution</label><br>
+		
+		<h3>Question 4:</h3>
+		<p>What should you do if a customer complains about a product or service?</p>
+		<label><input type="radio" name="q4" id="q4a1">Apologize and try to resolve the issue</label><br>
+		<label><input type="radio" name="q4" id="q4a2">Tell them it's not your problem</label><br>
+		<label><input type="radio" name="q4" id="q4a3">Ignore them and hope they go away</label><br>
+		<label><input type="radio" name="q4" id="q4a4">Argue with them</label><br>
+		
+		<h3>Question 5:</h3>
+		<p>What should you do if a customer leaves a negative review online?</p>
+		<label><input type="radio" name="q5" id="q5a1">Ignore it and hope no one else sees it</label><br>
+		<label><input type="radio" name="q5" id="q5a2">Respond politely and try to resolve the issue</label><br>
+		<label><input type="radio" name="q5" id="q5a3">Delete the review</label><br>
+		<label><input type="radio" name="q5" id="q5a4">Post a rude comment in response</label><br>
+		
+		<br>
+		<input type="button" value="Submit" onclick="checkAnswers()">
+	</form>
+</body>
+</html>
+
