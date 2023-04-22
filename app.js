@@ -142,22 +142,22 @@ app.use(
 
 //starting otp service-final
 
-// const accountSid = 'ACeca2a4f6bba192bd3604722a9c9e8c4d'; 
-// const authToken = 'ad1c0ef572325b6a1699e28cf1e88676'; 
-// const client = require('twilio')(accountSid, authToken); 
-// console.log("entering twiliio")
-// client.messages 
-//       .create({ 
-//          body: otp1,  
-//          messagingServiceSid: 'MG6ea432d1051520a226cd06d0a7475ac6',      
-//          to: '+919558771737' 
-//        }) 
-//   .then(function (res) {
-//     console.log("message has sent!");
-//   })
-//   .catch(function (err) {
-//     console.log(err);
-//   });
+const accountSid = 'ACeca2a4f6bba192bd3604722a9c9e8c4d'; 
+const authToken = 'ad1c0ef572325b6a1699e28cf1e88676'; 
+const client = require('twilio')(accountSid, authToken); 
+console.log("entering twiliio")
+client.messages 
+      .create({ 
+         body: otp1,  
+         messagingServiceSid: 'MG6ea432d1051520a226cd06d0a7475ac6',      
+         to: '+919558771737' 
+       }) 
+  .then(function (res) {
+    console.log("message has sent!");
+  })
+  .catch(function (err) {
+    console.log(err);
+  });
 // new integration
 
 app.get("/wronginput", (req, res) => {
@@ -254,6 +254,77 @@ app.post('/login', function (request, response) {
 
 });
 
+app.get("/admin", (req, res) => {
+	// res.sendFile(path2 + "login_new.html");
+	res.render(path2 + "admin.ejs");
+});
+
+app.get("/login1", (req, res) => {
+	// res.sendFile(path2 + "login_new.html");
+	res.render(path2 + "login_new1.ejs");
+});
+
+//starting otp service-final end 
+var otp1 = generateOTP();
+console.log("OTP", otp1);
+app.post('/login1', function (request, response) {
+	var username = request.body.uname;
+	var password = request.body.psw;
+	// var password = hashPassword(request.body.psw);
+	var otp = request.body.otp;
+	console.log(username)
+	console.log(password)
+	if (username && password) {
+		const query = 'SELECT * FROM admin WHERE username = ? AND password = ?';
+		connection.query(query, [username, password], function (error, results, fields) {
+			if (results.length > 0) {
+					if (otp1 == otp) {
+						request.session.username = username;
+						response.redirect('/admin');
+					}
+					else {
+						response.redirect("/wrong otp");
+					}
+			} else {
+				response.send("Incorrect username and/or password");
+			}
+		}
+		);
+	} else {
+		response.send("Please enter username and password");
+	}
+
+});
+app.get('/fullinfo', (req, res) => {
+	connection.query('SELECT * FROM video_progress', (error, results) => {
+	  if (error) throw error;
+	  res.render('get_fulluserinfo.ejs', { users: results });
+	});
+  });
+  
+app.get('/delete_user', (req, res) => {
+	connection.query('SELECT * FROM userdata', (error, results) => {
+	  if (error) throw error;
+	  res.render('delete_user.ejs', { users: results });
+	});
+  });
+  
+  app.post('/delete-user', (req, res) => {
+	const username = req.body.username;
+	console.log("username",username);
+	const sql = 'DELETE FROM userdata WHERE username = ?';
+	connection.query(sql, [username], (error, results) => {
+	  if (error) {
+		console.log(error);
+	  } else {
+		console.log("deleted")
+		res.redirect('/delete_user');
+	  }
+	});
+  });
+  
+  
+  
 app.get("/reg", (req, res) => {
 	res.render(path2 + "reg_new.ejs");
 });

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>EDUSTAFF</title>
+  <style>
+    th {
+      padding: 10px 15px;
+      text-align: left;
+      font-weight: bold;
+      background-color: #f5f5f5;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+    }
+    td {
+      padding: 10px 15px;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+	<!-- plugins:css -->
+	<link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
+	<link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
+	<link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+	<!-- endinject -->
+	<!-- Plugin css for this page -->
+	<link rel="stylesheet" href="vendors/select2/select2.min.css" />
+	<link rel="stylesheet" href="vendors/select2-bootstrap-theme/select2-bootstrap.min.css" />
+	<!-- End plugin css for this page -->
+	<!-- inject:css -->
+	<!-- endinject -->
+	<!-- Layout styles -->
+	<link rel="stylesheet" href="css/demo_2/style.css" />
+	<!-- End layout styles -->
+	<link rel="shortcut icon" href="images/logo3.png" />
+</head>
+<body>
+	<div class="container-scroller">
+		<div class="horizontal-menu">
+			<%- include("./partials/navbar", {'logged_in':false}); %>
+		</div>
+		<!-- partial -->
+		<div class="container-fluid page-body-wrapper">
+			<div class="main-panel">
+				<div class="content-wrapper">
+          <div class="container-fluid page-body-wrapper">
+            <div class="main-panel">
+              <div class="content-wrapper">
+                <div class="page-header">
+                  <div>
+                    <h1>User List</h1>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Username</th>
+                          <th>Role</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% for (let i = 0; i < users.length; i++) { %>
+                          <tr>
+                            <td><%= users[i].username %></td>
+                            <td><%= users[i].role %></td>
+                            <td>
+                              <form method="post" action="/delete-user">
+                                <input type="hidden" name="username" value="<%= users[i].username %>">
+                                <button type="submit">Delete</button>
+                              </form>
+                            </td>
+                          </tr>
+                        <% } %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+			<!-- page-body-wrapper ends -->
+		</div>
+		<!-- container-scroller -->
+		<!-- plugins:js -->
+		<script src="vendors/js/vendor.bundle.base.js"></script>
+		<!-- endinject -->
+		<!-- Plugin js for this page -->
+		<script src="vendors/select2/select2.min.js"></script>
+		<script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
+		<!-- End plugin js for this page -->
+		<!-- inject:js -->
+		<script src="js/off-canvas.js"></script>
+		<script src="js/hoverable-collapse.js"></script>
+		<script src="js/misc.js"></script>
+		<script src="js/settings.js"></script>
+		<script src="js/todolist.js"></script>
+		<!-- endinject -->
+		<!-- Custom js for this page -->
+		<script src="js/file-upload.js"></script>
+		<script src="js/typeahead.js"></script>
+		<script src="js/select2.js"></script>
+	
+</body>
+
+</html>

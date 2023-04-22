@@ -11,6 +11,6 @@ COPY . .
 # Set file permissions
 RUN chmod -R 755 /usr/src/app
 
-EXPOSE 8080
+EXPOSE 8000
 
 CMD [ "node", "app.js" ]
