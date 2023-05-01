@@ -101,6 +101,7 @@ var passChange = {
 
 let secrateKey = "secrateKey";
 const crypto = require("crypto");
+const { request } = require("http");
 
 function hashPassword(password) {
 	const hash = crypto.createHash('sha256');
@@ -144,44 +145,25 @@ app.use(
 		saveUninitialized: true,
 	})
 );
-const SENDGRID_API_KEY = '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';
-const sendEmail = async (emailBody) => {
-	const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
-	  method: 'POST',
-	  headers: {
-		'Content-Type': 'application/json',
-		Authorization: `Bearer ${SENDGRID_API_KEY}`,
-	  },
-	  body: JSON.stringify({
-		personalizations: [
-		  {
-			to: [
-			  {
-				email: 'deepnakrani19@gnu.ac.in',
-			  },
-			],
-			subject: 'Test Email',
-		  },
-		],
-		from: {
-		  email: 'testshah889@gmail.com',
-		  name: 'Sender Name',
-		},
-		content: [
-		  {
-			type: 'text/plain',
-			value: emailBody,
-		  },
-		],
-	  }),
-	});
-  
-	if (response.status === 202) {
-	  console.log('Email sent successfully!');
-	} else {
-	  console.error('Failed to send email:', response.status, await response.text());
-	}
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey('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');
+
+function sendEmail(email, otp1) {
+  const msg = {
+      to: email,
+      from: 'testshah889@gmail.com',
+      subject: 'Edustaff OTP',
+    //   text: otp,
+      html: otp1,
   };
+  sgMail.send(msg)
+    .then(() => {
+        console.log('Email sent');
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+}
 
 //starting otp service-final
 
@@ -239,7 +221,7 @@ var otp1 = generateOTP();
 console.log("OTP", otp1);
 app.get("/login", (req, res) => {
 	// res.sendFile(path2 + "login_new.html");
-	sendEmail(otp1)
+	sendEmail("yashshah19@gnu.ac.in",otp1)
 	res.render(path2 + "login_new.ejs");
 
 });
