@@ -17,20 +17,20 @@
 // });
 module.exports = con;
 
-var mysql=require('mysql');
-var con =mysql.createPool(
-    {
-        host: "localhost",
-        user: "root",
-        password: "yash@123",
-        database:"project",
-        port:3306
+// var mysql=require('mysql');
+// var con =mysql.createPool(
+//     {
+//         host: "localhost",
+//         user: "root",
+//         password: "yash@123",
+//         database:"project",
+//         port:3306
 
-        });
-// var con = mysql.createPool({
-//     host: "terraform-20230407134402900000000001.cmedonl60wg5.us-east-1.rds.amazonaws.com",
-//     user: "yash",
-//     password: "yashshah",
-//     database:"project"
-// });
+//         });
+var con = mysql.createPool({
+    host: "terraform-20230407134402900000000001.cmedonl60wg5.us-east-1.rds.amazonaws.com",
+    user: "yash",
+    password: "yashshah",
+    database:"project"
+});
 module.exports = con;
