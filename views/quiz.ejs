@@ -163,7 +163,52 @@
 		</div>
 		<!-- page-body-wrapper ends -->
 	</div>
+	<script src=
+    "https://smtpjs.com/v3/smtp.js">
+  </script>
 	<script>
+
+const sendEmail = async () => {
+	const SENDGRID_API_KEY = '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';
+  const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${SENDGRID_API_KEY}`,
+    },
+    body: JSON.stringify({
+      personalizations: [
+        {
+          to: [
+            {
+              email: 'yashshah19@gnu.ac.in',
+            },
+          ],
+          subject: 'Test Email',
+        },
+      ],
+      from: {
+        email: 'testshah889@gmail.com',
+        name: 'Sender Name',
+      },
+      content: [
+        {
+          type: 'text/plain',
+          value: 'Hello, World!',
+        },
+      ],
+    }),
+  });
+
+  if (response.status === 202) {
+    console.log('Email sent successfully!');
+  } else {
+    console.error('Failed to send email:', response.status, await response.text());
+  }
+};
+
+
+		const { createCanvas, loadImage } = require('canvas');
 		function checkAnswers() {
 			var total = 5;
 			var score = 0;
@@ -195,9 +240,56 @@
 			
 			// Display results
 			var percent = Math.round((score/total)*100);
-			alert("You scored " + score + " out of " + total + ".\n\nYour percentage score is: " + percent + "%.");
+			
+			if (percent >= 60) {
+				sendEmail();
+				var canvas = document.createElement('canvas');
+				canvas.width = 800;
+				canvas.height = 600;
+				var context = canvas.getContext('2d');
+				context.fillStyle = 'lightblue'; // Replace with your desired background color
+				context.fillRect(0, 0, canvas.width, canvas.height);
+				
+				// Add text to the canvas
+				context.fillStyle = 'black';
+				context.font = 'bold 48px Arial';
+				context.textAlign = 'center';
+				context.fillText('Certificate of Achievement', canvas.width / 2, 150);
+				context.font = 'bold 36px Arial';
+				context.fillText('This certifies that', canvas.width / 2, 250);
+				context.font = 'bold 48px Arial';
+				context.fillText('Yash Shah', canvas.width / 2, 320);
+				context.font = 'bold 36px Arial';
+				context.fillText('has successfully completed the', canvas.width / 2, 390);
+				context.fillText('Introduction to Customer Service', canvas.width / 2, 440);
+				context.font = 'bold 24px Arial';
+				context.fillText('Dated this 1st day of May, 2023', canvas.width / 2, 520);
+				
+				// Convert the canvas to an image
+				var dataUrl = canvas.toDataURL('image/png');
+				
+				// Create a link to download the image
+				var link = document.createElement('a');
+				link.download = 'certificate.png';
+				link.href = dataUrl;
+				document.body.appendChild(link);
+				
+				// Click the link to download the image
+				link.click();
+				
+				// Remove the link from the document
+				document.body.removeChild(link);
+			
+
+			} else {
+				sendEmail();
+				alert("You scored " + score + " out of " + total + ".\n\nYour percentage score is: " + percent + "%. Please try again.");
+			}
 		}
 	</script>
+	
+	  
+	  
 	<!-- container-scroller -->
 	<!-- plugins:js -->
 	<script src="vendors/js/vendor.bundle.base.js"></script>

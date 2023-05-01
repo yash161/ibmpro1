@@ -1,4 +1,6 @@
 const express = require("express");
+const pdf = require('html-pdf');
+const fs = require("fs");
 const path = require("path");
 const checksum_lib = require("./Paytm/checksum");
 const config = require("./Paytm/config");
@@ -41,6 +43,10 @@ app.use(
 		saveUninitialized: true,
 	})
 );
+// const options = {
+// 	key: fs.readFileSync("C:\\Users\\yashs\\Desktop\\ibmfullfinal\\newfinal\\IBM_SEM8_Final\\private.key"),
+// 	cert: fs.readFileSync('/path/to/certificate.crt')
+//   };
 
 // EXPRESS SPECIFIC STUFF
 // app.use("/static", express.static("static")); // For serving static files
@@ -295,6 +301,10 @@ app.post('/login1', function (request, response) {
 	}
 
 });
+app.get('/Certificate', (req, res) => {
+	console.log("received request")
+  });
+  
 app.get('/fullinfo', (req, res) => {
 	connection.query('SELECT * FROM video_progress', (error, results) => {
 	  if (error) throw error;
@@ -453,6 +463,33 @@ app.post("/resetProgress", (req, res) => {
 			}
 		}
 	);
+});
+
+app.post("/ ", (req, res) => {
+	// const videoId = req.body.videoId;
+	const userId = req.session.username;
+	
+	// Define the certificate content as a template string
+	const certificateContent = `
+		<html>
+			<head>
+				<title>Certificate of Completion</title>
+			</head>
+			<body>
+				<h1>Certificate of Completion</h1>
+				<p>This certifies that ${userId} has completed the video course.</p>
+				<p>Date: ${new Date().toDateString()}</p>
+			</body>
+		</html>
+	`;
+	pdf.create(certificateContent).toFile('./certificate.pdf', (err, result) => {
+		if (err) {
+			console.error(err);
+			return res.sendStatus(500);
+		}
+		res.download('./certificate.pdf');
+		fs.unlinkSync('./certificate.pdf');
+	});
 });
 
 app.post("/saveProgress", (req, res) => {
