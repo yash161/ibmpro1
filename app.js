@@ -144,26 +144,63 @@ app.use(
 		saveUninitialized: true,
 	})
 );
-
+const SENDGRID_API_KEY = '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';
+const sendEmail = async (emailBody) => {
+	const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
+	  method: 'POST',
+	  headers: {
+		'Content-Type': 'application/json',
+		Authorization: `Bearer ${SENDGRID_API_KEY}`,
+	  },
+	  body: JSON.stringify({
+		personalizations: [
+		  {
+			to: [
+			  {
+				email: 'deepnakrani19@gnu.ac.in',
+			  },
+			],
+			subject: 'Test Email',
+		  },
+		],
+		from: {
+		  email: 'testshah889@gmail.com',
+		  name: 'Sender Name',
+		},
+		content: [
+		  {
+			type: 'text/plain',
+			value: emailBody,
+		  },
+		],
+	  }),
+	});
+  
+	if (response.status === 202) {
+	  console.log('Email sent successfully!');
+	} else {
+	  console.error('Failed to send email:', response.status, await response.text());
+	}
+  };
 
 //starting otp service-final
 
-const accountSid = 'ACeca2a4f6bba192bd3604722a9c9e8c4d'; 
-const authToken = 'ad1c0ef572325b6a1699e28cf1e88676'; 
-const client = require('twilio')(accountSid, authToken); 
-console.log("entering twiliio")
-client.messages 
-      .create({ 
-         body: otp1,  
-         messagingServiceSid: 'MG6ea432d1051520a226cd06d0a7475ac6',      
-         to: '+919558771737' 
-       }) 
-  .then(function (res) {
-    console.log("message has sent!");
-  })
-  .catch(function (err) {
-    console.log(err);
-  });
+// const accountSid = 'ACeca2a4f6bba192bd3604722a9c9e8c4d'; 
+// const authToken = 'ad1c0ef572325b6a1699e28cf1e88676'; 
+// const client = require('twilio')(accountSid, authToken); 
+// console.log("entering twiliio")
+// client.messages 
+//       .create({ 
+//          body: otp1,  
+//          messagingServiceSid: 'MG6ea432d1051520a226cd06d0a7475ac6',      
+//          to: '+919558771737' 
+//        }) 
+//   .then(function (res) {
+//     console.log("message has sent!");
+//   })
+//   .catch(function (err) {
+//     console.log(err);
+//   });
 // new integration
 
 app.get("/wronginput", (req, res) => {
@@ -232,7 +269,8 @@ app.post('/login', function (request, response) {
 							roleValue = t1;
 						});
 					});
-
+					// email=""
+					sendEmail(otp1)
 					console.log(roleValue);
 					if (otp1 == otp) {
 						if (roleValue === "customerservice") {
