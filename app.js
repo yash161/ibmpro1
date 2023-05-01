@@ -235,16 +235,19 @@ app.get("/new1", (req, res) => {
 	// console.log(username)
 	res.render("index1", { username: username });
 });
-
+var otp1 = generateOTP();
+console.log("OTP", otp1);
 app.get("/login", (req, res) => {
 	// res.sendFile(path2 + "login_new.html");
+	sendEmail(otp1)
 	res.render(path2 + "login_new.ejs");
+
 });
 
 //starting otp service-final end 
-var otp1 = generateOTP();
-console.log("OTP", otp1);
+
 app.post('/login', function (request, response) {
+	
 	var username = request.body.uname;
 	var password = hashPassword(request.body.psw);
 	var otp = request.body.otp;
@@ -270,7 +273,6 @@ app.post('/login', function (request, response) {
 						});
 					});
 					// email=""
-					sendEmail(otp1)
 					console.log(roleValue);
 					if (otp1 == otp) {
 						if (roleValue === "customerservice") {
@@ -305,12 +307,11 @@ app.get("/admin", (req, res) => {
 
 app.get("/login1", (req, res) => {
 	// res.sendFile(path2 + "login_new.html");
+	sendEmail(otp1)
 	res.render(path2 + "login_new1.ejs");
 });
 
 //starting otp service-final end 
-var otp1 = generateOTP();
-console.log("OTP", otp1);
 app.post('/login1', function (request, response) {
 	var username = request.body.uname;
 	var password = request.body.psw;
