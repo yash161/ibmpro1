@@ -168,46 +168,22 @@
   </script>
 	<script>
 
-// const sendEmail = async () => {
-// 	const SENDGRID_API_KEY = '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';
-//   const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       Authorization: `Bearer ${SENDGRID_API_KEY}`,
-//     },
-//     body: JSON.stringify({
-//       personalizations: [
-//         {
-//           to: [
-//             {
-//               email: 'yashshah19@gnu.ac.in',
-//             },
-//           ],
-//           subject: 'Test Email',
-//         },
-//       ],
-//       from: {
-//         email: 'testshah889@gmail.com',
-//         name: 'Sender Name',
-//       },
-//       content: [
-//         {
-//           type: 'text/plain',
-//           value: 'Hello, World!',
-//         },
-//       ],
-//     }),
-//   });
-
-//   if (response.status === 202) {
-//     console.log('Email sent successfully!');
-//   } else {
-//     console.error('Failed to send email:', response.status, await response.text());
-//   }
-// };
-
-
+		function sendEmail(email, otp1) {
+		const msg = {
+			to: email,
+			from: 'testshah889@gmail.com',
+			subject: 'Edustaff OTP',
+			//   text: otp,
+			html: otp1,
+		};
+		sgMail.send(msg)
+			.then(() => {
+				console.log('Email sent');
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+}
 		const { createCanvas, loadImage } = require('canvas');
 		function checkAnswers() {
 			var total = 5;
@@ -238,11 +214,20 @@
 				score++;
 			}
 			
-			// Display results
 			var percent = Math.round((score/total)*100);
 			
 			if (percent >= 60) {
-				sendEmail();
+				var today = new Date();
+
+				// Format the date
+				var formattedDate = today.toLocaleDateString('en-US', { 
+					weekday: 'long', 
+					year: 'numeric', 
+					month: 'long', 
+					day: 'numeric' 
+				});
+
+					
 				var canvas = document.createElement('canvas');
 				canvas.width = 800;
 				canvas.height = 600;
@@ -263,9 +248,7 @@
 				context.fillText('has successfully completed the', canvas.width / 2, 390);
 				context.fillText('Introduction to Customer Service', canvas.width / 2, 440);
 				context.font = 'bold 24px Arial';
-				context.fillText('Dated this 1st day of May, 2023', canvas.width / 2, 520);
-				
-				// Convert the canvas to an image
+				context.fillText('Dated this ' + formattedDate, canvas.width / 2, 520);
 				var dataUrl = canvas.toDataURL('image/png');
 				
 				// Create a link to download the image
@@ -273,16 +256,17 @@
 				link.download = 'certificate.png';
 				link.href = dataUrl;
 				document.body.appendChild(link);
-				
-				// Click the link to download the image
+
 				link.click();
 				
-				// Remove the link from the document
-				document.body.removeChild(link);
 			
+				document.body.removeChild(link);
+				
+				
 
 			} else {
-				sendEmail();
+				// sendEmail();
+				console.log("not scored")
 				alert("You scored " + score + " out of " + total + ".\n\nYour percentage score is: " + percent + "%. Please try again.");
 			}
 		}
