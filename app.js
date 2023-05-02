@@ -221,7 +221,7 @@ var otp1 = generateOTP();
 console.log("OTP", otp1);
 app.get("/login", (req, res) => {
 	// res.sendFile(path2 + "login_new.html");
-	sendEmail("yashshah19@gnu.ac.in",otp1)
+	sendEmail("deepnakrani19@gnu.ac.in",otp1)
 	res.render(path2 + "login_new.ejs");
 
 });
