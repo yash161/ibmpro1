@@ -15,7 +15,7 @@ pipeline {
             steps {
                 // Run Docker container and expose port 8000
                 script {
-                    docker.run('-p 8000:80 --name my-container my-image:latest')
+                     docker.image('my-image:latest').withRun('-p 8000:8000')
                 }
             }
         }
