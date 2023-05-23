@@ -4,23 +4,18 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // Clone your source code repository or perform any required build steps
-
-                // Build your Docker image
+                // Build Docker image from Dockerfile in the current folder
                 script {
-                    docker.image('my-image:latest').build()
+                    docker.build('my-image:latest', '.')
                 }
             }
         }
-
+        
         stage('Run') {
             steps {
-                // Run your Docker container
+                // Run Docker container and expose port 8000
                 script {
-                    docker.image('my-image:latest').withRun('-p 8000:80 --name my-container') {
-                        // Any additional steps you want to run inside the container
-                        // For example, running tests or deployment commands
-                    }
+                    docker.run('-p 8000:80 --name my-container my-image:latest')
                 }
             }
         }
