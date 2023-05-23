@@ -15,7 +15,12 @@ pipeline {
             steps {
                 // Run Docker container and expose port 8000
                 script {
-                     docker.image('my-image:latest').withRun('-p 8000:8000')
+                    def container = docker.image('my-image:latest').run('-p 8000:8000')
+                    // Additional steps you want to run inside the container
+                    // For example, running tests or deployment commands
+                    container.inside {
+                        // Your additional steps here
+                    }
                 }
             }
         }
