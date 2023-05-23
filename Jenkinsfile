@@ -10,11 +10,15 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Run') {
             steps {
                 // Run Docker container and expose port 8000
-                sh 'docker run -d -p 8000:8000 --name my-image my-image:latest'
+                script {
+                    docker.withRun('-p 8000:8000 --name my-container -d', 'my-image:latest') {
+                        // No additional steps inside the container
+                    }
+                }
             }
         }
     }
