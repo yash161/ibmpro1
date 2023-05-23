@@ -6,7 +6,7 @@ pipeline {
             steps {
                 // Build Docker image from Dockerfile in the current folder
                 script {
-                    docker.build('my-image:latest', '.')
+                    sudo('docker build -t my-image:latest .')
                 }
             }
         }
@@ -15,7 +15,7 @@ pipeline {
             steps {
                 // Run Docker container and expose port 8000
                 script {
-                    docker.run('-p 8000:80 --name my-container my-image:latest')
+                    sudo('docker run -p 8000:80 --name my-container my-image:latest')
                 }
             }
         }
